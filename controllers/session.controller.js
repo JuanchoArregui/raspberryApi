@@ -6,19 +6,19 @@ module.exports.create = (req, res, next) => {
   const password = req.body.password;
 
   if (!email || !password) {
-    next(new ApiError('Email and password are required'));
+    next(new ApiError('Session Controller error: Email and password are required!!'));
   } else {
-    passport.authenticate('local-auth', (error, user, message) => {
+    passport.authenticate('local-auth', (error, participant, message) => {
       if (error) {
         next(error);
-      } else if (!user) {
-        next(new ApiError(message, 401));
+      } else if (!participant) {
+        next(new ApiError('Session Controller error!', 401));
       } else {
-        req.login(user, (error) => {
+        req.login(participant, (error) => {
           if (error) {
-            next(new ApiError(error.message, 500));
+            next(new ApiError('Session Controller error!!', 500));
           } else {
-            res.status(201).json(req.user);
+            res.status(201).json(req.participant);
           }
         });
       }

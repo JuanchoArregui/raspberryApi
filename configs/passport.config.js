@@ -1,16 +1,16 @@
-const User = require('../models/user.model');
+const Participant = require('../models/participant.model');
 const LocalStrategy = require('passport-local').Strategy;
-const ApiError = require('../models/api-error.model');
+// const ApiError = require('../models/api-error.model');
 
 module.exports.setup = (passport) => {
-  passport.serializeUser((user, next) => {
-    next(null, user._id);
+  passport.serializeUser((participant, next) => {
+    next(null, participant._id);
   });
 
   passport.deserializeUser((id, next) => {
-    User.findById(id)
-      .then(user => {
-        next(null, user);
+    Participant.findById(id)
+      .then(participant => {
+        next(null, participant);
       })
       .catch(error => next(error));
   });
@@ -19,15 +19,15 @@ module.exports.setup = (passport) => {
     usernameField: 'email',
     passwordField: 'password'
   }, (email, password, next) => {
-    User.findOne({ email: email })
-      .then(user => {
-        if (!user) {
-          next(null, user, 'Invalid email or password');
+    Participant.findOne({ email: email })
+      .then(participant => {
+        if (!participant) {
+          next(null, participant, 'Invalid email or password');
         } else {
-          user.checkPassword(password)
+          participant.checkPassword(password)
             .then(match => {
               if (match) {
-                next(null, user);
+                next(null, participant);
               } else {
                 next(null, null, 'Invalid email or password');
               }

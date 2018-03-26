@@ -1,3 +1,4 @@
+// Require project dependencies
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -7,16 +8,31 @@ const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const corsConfig = require('./configs/cors.config');
+const favicon = require('serve-favicon');
 
+
+// Rquire Environment Variables ----> IMPORTANT: remeber to add the .env file to GitIgnore!!!
+require("dotenv").config();
+
+// Import DB and passport config
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
+// Require routes
+const index = require('./routes/index.routes');
 const assetsRoutes = require('./routes/assets.routes')
 const participantsRoutes = require('./routes/participants.routes');
+const transactionsRoutes = require('./routes/transactions.routes');
 const sessionRoutes = require('./routes/session.routes');
 
+// initialize  Express application
 const app = express();
 
+// view engine setup
+// As this is an API we are not going to set the EJS engine view
+// If it were just an express App here we sould setup the engine views
+
+// Middlewares
 app.use(cors(corsConfig))
 
 app.use(logger('dev'));

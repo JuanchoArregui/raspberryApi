@@ -31,3 +31,7 @@ npm-debug.log
 
 public/uploads/*.jpg
 public/uploads/*.png
+
+# Environment Variables
+.env
+

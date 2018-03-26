@@ -1,12 +1,23 @@
 const mongoose = require('mongoose');
-const DB_NAME = 'phone-store';
+
+// Environment Variables ----> IMPORTANT: remeber to add the .env file to GitIgnore!!!
+//IMPORTANT: in production set MONOGO_URI to MOGOLABS_URL
+const DB_NAME = 'brickfy_DB';
 const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost/${DB_NAME}`;
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI)
     .then(() => {
-        console.info(`Connect to db ${DB_NAME}`);
+        console.info(
+            `\n***********************
+            \rBRICKFY DATA BASE SERVER STARTED UP!!!!!
+            \rYeah, Mongo Rules! Connected to db ${DB_NAME}
+            \r***********************`
+          );
     })
     .catch(error => {
-        console.error(`Unable to connect to db ${DB_NAME}: ${error}`);
+        console.error(
+            `WARNING!!!!!!!!!!!!!!!!!!!!!!
+            Oops... Unable to connect to db ${DB_NAME}: ${error}`
+          );
     })

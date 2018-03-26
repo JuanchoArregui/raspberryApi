@@ -42,8 +42,8 @@ const participantSchema = new mongoose.Schema({
   }],
   roll: {
     type: String,
-    required: [true, 'User needs a password'],
-    default: ''
+    required: [true, 'PArticipant needs a roll'],
+    default: 'investor'
 
   }
 },

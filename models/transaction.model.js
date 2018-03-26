@@ -1,20 +1,16 @@
 const mongoose = require('mongoose');
-const assetSchema = new mongoose.Schema({
-    brand: {
+const transactionSchema = new mongoose.Schema({
+    assetId: {
         type: String,
         required: [true, 'The phone brand is required']
     },
-    name: {
+    newOwner: {
         type: String,
-        required: [true, 'The phone name is required']
+        required: [true, 'owner is required']
     },
-    image: {
-        type: String,
-        default: ''
-    },
-    specs: {
-        type: [String],
-        default: []
+    newValue: {
+        type: Number,
+        required: [true, 'Value is required']
     }
 }, { 
     timestamps: true,
@@ -28,5 +24,5 @@ const assetSchema = new mongoose.Schema({
     }
  });
 
- const Asset = mongoose.model('Asset', assetSchema);
- module.exports = Asset;
+ const Transaction = mongoose.model('Transaction', assetSchema);
+ module.exports = Transaction;
