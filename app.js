@@ -11,8 +11,8 @@ const corsConfig = require('./configs/cors.config');
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
-const phonesRoutes = require('./routes/phones.routes')
-const usersRoutes = require('./routes/users.routes');
+const assetsRoutes = require('./routes/assets.routes')
+const participantsRoutes = require('./routes/participants.routes');
 const sessionRoutes = require('./routes/session.routes');
 
 const app = express();
@@ -43,10 +43,12 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Routes
-app.use('/phones', phonesRoutes);
-app.use('/users', usersRoutes);
+app.use('/assets', assetsRoutes);
+app.use('/participants', participantsRoutes);
 app.use('/session', sessionRoutes);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next)  => {

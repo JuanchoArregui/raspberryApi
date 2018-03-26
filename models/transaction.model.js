@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const phoneSchema = new mongoose.Schema({
+const assetSchema = new mongoose.Schema({
     brand: {
         type: String,
         required: [true, 'The phone brand is required']
@@ -28,5 +28,5 @@ const phoneSchema = new mongoose.Schema({
     }
  });
 
- const Phone = mongoose.model('Phone', phoneSchema);
- module.exports = Phone;
+ const Asset = mongoose.model('Asset', assetSchema);
+ module.exports = Asset;

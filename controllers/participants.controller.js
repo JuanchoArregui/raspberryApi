@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
-const User = require('../models/user.model');
+const Participant = require('../models/participant.model');
 const ApiError = require('../models/api-error.model');
 
 module.exports.create = (req, res, next) => {
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      if (user) {
-        next(new ApiError('User already registered', 400));
+  Participant.findOne({ email: req.body.email })
+    .then(participant => {
+      if (participant) {
+        next(new ApiError('User/Participant already registered', 400));
       } else {
-        user = new User(req.body);
-        user.save()
+        participant = new Participant(req.body);
+        participant.save()
           .then(() => {
-            res.json(user);
+            res.json(participant);
           })
           .catch(error => {
             if (error instanceof mongoose.Error.ValidationError) {
@@ -21,5 +21,5 @@ module.exports.create = (req, res, next) => {
             }
           });
       }
-    }).catch(error => next(new ApiError('User already registered', 500)));
+    }).catch(error => next(new ApiError('User/Participant already registered', 500)));
 }

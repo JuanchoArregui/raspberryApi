@@ -1,33 +1,33 @@
 const mongoose = require('mongoose');
-const Phone = require('../models/phone.model');
+const Asset = require('../models/asset.model');
 const ApiError = require('../models/api-error.model');
 
 module.exports.list = (req, res, next) => {
-  Phone.find()
-    .then(phones => res.json(phones))
+  Asset.find()
+    .then(assets => res.json(assets))
     .catch(error => next(error));
 }
 
 module.exports.get = (req, res, next) => {
   const id = req.params.id;
-  Phone.findById(id)
-    .then(phone => {
-      if (phone) {
-        res.json(phone)
+  Asset.findById(id)
+    .then(asset => {
+      if (asset) {
+        res.json(asset)
       } else {
-        next(new ApiError(`Phone not found`, 404));
+        next(new ApiError(`Asset not found`, 404));
       }
     }).catch(error => next(error));
 }
 
 module.exports.create = (req, res, next) => {
-  const phone = new Phone(req.body);
+  const asset = new Asset(req.body);
   if (req.file) {
-    phone.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    asset.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
   }
-  phone.save()
+  asset.save()
     .then(() => {
-      res.status(201).json(phone);
+      res.status(201).json(asset);
     })
     .catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
@@ -40,12 +40,12 @@ module.exports.create = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
   const id = req.params.id;
-  Phone.findByIdAndRemove(id)
-    .then(phone => {
-      if (phone) {
+  Asset.findByIdAndRemove(id)
+    .then(asset => {
+      if (asset) {
         res.status(204).json()
       } else {
-        next(new ApiError(`Phone not found`, 404));
+        next(new ApiError(`Asset not found`, 404));
       }
     }).catch(error => next(error));
 }
@@ -56,12 +56,12 @@ module.exports.edit = (req, res, next) => {
     body.image = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
   }
   
-  Phone.findByIdAndUpdate(id, { $set: req.body }, { new: true })
-    .then(phone => {
-      if (phone) {
-        res.json(phone)
+  Asset.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    .then(asset => {
+      if (asset) {
+        res.json(asset)
       } else {
-        next(new ApiError(`Phone not found`, 404));
+        next(new ApiError(`Asset not found`, 404));
       }
     }).catch(error => {
       if (error instanceof mongoose.Error.ValidationError) {
