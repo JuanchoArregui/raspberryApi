@@ -32,6 +32,8 @@ const app = express();
 // As this is an API we are not going to set the EJS engine view
 // If it were just an express App here we sould setup the engine views
 
+
+
 // Middlewares
 app.use(cors(corsConfig))
 
