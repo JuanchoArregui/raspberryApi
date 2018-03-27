@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const uploadConfig = require('../configs/multer.config');
 const assetsController = require('../controllers/assets.controller');
+
+const uploadConfig = require('../configs/multer.config');
 const assetsMiddleware = require('../middleware/assets.middleware');
 const secureMiddleware = require('../middleware/secure.middleware');
 
