@@ -19,11 +19,11 @@ require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
 // Require routes
-const index = require('./routes/index.routes');
 const assetsRoutes = require('./routes/assets.routes')
+const indexRoutes = require('./routes/index.routes');
 const participantsRoutes = require('./routes/participants.routes');
-const transactionsRoutes = require('./routes/transactions.routes');
 const sessionRoutes = require('./routes/session.routes');
+const transactionsRoutes = require('./routes/transactions.routes');
 
 // initialize  Express application
 const app = express();
@@ -64,13 +64,15 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/assets', assetsRoutes);
+app.use('/', indexRoutes);
 app.use('/participants', participantsRoutes);
 app.use('/session', sessionRoutes);
+app.use('/transactions', transactionsRoutes);
 
 
 // catch 404 and forward to error handler
 app.use((req, res, next)  => {
-  const error = new Error('Not Found');
+  const error = new Error('BrickMessage from the App.js: Not Found');
   error.status = 404;
   next(error);
 });

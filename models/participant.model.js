@@ -36,15 +36,15 @@ const participantSchema = new mongoose.Schema({
   address: [{ 
     country: String, 
     address1: String,
-    address1: String,
+    address2: String,
     city: String,
     postalCode: String 
   }],
   roll: {
     type: String,
-    required: [true, 'PArticipant needs a roll'],
-    default: 'investor'
-
+    enum: [ "Investor", "Platform", "Admin"],
+    required: [true, 'Participant needs a roll'],
+    default: 'Investor'
   }
 },
 
