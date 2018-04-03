@@ -19,6 +19,7 @@ module.exports.create = (req, res, next) => {
             next(new ApiError('Session Controller error!!', 500));
           } else {
             res.status(201).json(req.participant);
+            
           }
         });
       }
