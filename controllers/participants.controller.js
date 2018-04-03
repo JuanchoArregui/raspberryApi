@@ -23,3 +23,9 @@ module.exports.create = (req, res, next) => {
       }
     }).catch(error => next(new ApiError('User/Participant already registered', 500)));
 }
+
+module.exports.list = (req, res, next) => {
+  Participant.find()
+    .then(participants => res.json(participants))
+    .catch(error => next(error));
+}
