@@ -29,3 +29,23 @@ module.exports.list = (req, res, next) => {
     .then(participants => res.json(participants))
     .catch(error => next(error));
 }
+
+
+module.exports.edit = (req, res, next) => {
+  const id = req.params.id;
+  
+  Participant.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    .then(participant => {
+      if (participant) {
+        res.json(participant)
+      } else {
+        next(new ApiError(`Participant not found`, 404));
+      }
+    }).catch(error => {
+      if (error instanceof mongoose.Error.ValidationError) {
+        next(new ApiError(error.message, 400, error.errors));
+      } else {
+        next(new ApiError(error.message, 500));
+      }
+    });
+}
