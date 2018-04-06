@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const transactionSchema = new mongoose.Schema({
     assetId: {
         type: String,
-        required: [true, 'The phone brand is required']
+        required: [true, 'The passet ID is required']
     },
     newOwner: {
         type: String,
-        required: [true, 'owner is required']
+        required: [true, 'The owner ID is required']
     },
     newValue: {
         type: Number,

@@ -4,7 +4,7 @@ const Schema   = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
 const participantSchema = new mongoose.Schema({
-  
+
   email: {
     type: String,
     lowercase: true,
@@ -26,8 +26,7 @@ const participantSchema = new mongoose.Schema({
     type: String
   },
   description: {
-    type: String,
-    maxlength: 250
+    type: String
   },
   image: {
     type: String,
@@ -38,6 +37,7 @@ const participantSchema = new mongoose.Schema({
     address1: String,
     address2: String,
     city: String,
+    estate: String,
     postalCode: String 
   }],
   roll: {
@@ -45,7 +45,37 @@ const participantSchema = new mongoose.Schema({
     enum: [ "Investor", "Platform", "Admin"],
     required: [true, 'Participant needs a roll'],
     default: 'Investor'
-  }
+  },
+  dateBorn:{
+    type: Date
+  },
+  foundation: {
+    type: Number
+  },
+  brickfyParticipantId: {
+    type: String
+  },
+  url: {
+    type: String
+  },
+  linkedin: {
+    type: String
+  },
+  twitter: {
+    type: String
+  },
+  facebook: {
+    type: String
+  },
+  phone: {
+    type: String
+  },
+  accountId: {
+    type: String
+  },
+  accounBalance: {
+    type: Number
+  },
 },
 
 //Additional Mongoose Settings

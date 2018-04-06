@@ -4,6 +4,7 @@ const ApiError = require('../models/api-error.model');
 module.exports.create = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log(password)
 
   if (!email || !password) {
     next(new ApiError('Session Controller error: Email and password are required!!'));
@@ -18,7 +19,8 @@ module.exports.create = (req, res, next) => {
           if (error) {
             next(new ApiError('Session Controller error!!', 500));
           } else {
-            res.status(201).json(req.participant);
+            console.log('session created!')
+            res.status(201).json({id: participant._id, email: participant.email});
             
           }
         });
