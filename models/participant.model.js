@@ -45,37 +45,8 @@ const participantSchema = new mongoose.Schema({
     enum: [ "Investor", "Platform", "Admin"],
     required: [true, 'Participant needs a roll'],
     default: 'Investor'
-  },
-  dateBorn:{
-    type: Date
-  },
-  foundation: {
-    type: Number
-  },
-  brickfyParticipantId: {
-    type: String
-  },
-  url: {
-    type: String
-  },
-  linkedin: {
-    type: String
-  },
-  twitter: {
-    type: String
-  },
-  facebook: {
-    type: String
-  },
-  phone: {
-    type: String
-  },
-  accountId: {
-    type: String
-  },
-  accounBalance: {
-    type: Number
-  },
+  }
+  
 },
 
 //Additional Mongoose Settings
