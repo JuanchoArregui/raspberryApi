@@ -10,7 +10,7 @@ mongoose.connect(MONGODB_URI)
     .then(() => {
         console.info(
             `\n***********************
-            \rBRICKFY DATA BASE SERVER STARTED UP!!!!!
+            \ART EX MACHINA DATA BASE SERVER STARTED UP!!!!!
             \rYeah, Mongo Rules! Connected to db ${DB_NAME}
             \r***********************`
           );

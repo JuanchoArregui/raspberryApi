@@ -24,23 +24,6 @@ require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
 
-// Require "node-cron" task scheduler, so that we can schedule our app to check the email every five minutes
-const cron = require('node-cron');
-
-
-// Require "mail-notifier" so that we can check new emails
-// we can also use "node-imap" IMAP email client, so that we can receive emails
-const notifier = require('mail-notifier');
-const imap = {
-      user: process.env.EMAIL_IMAP_USER,
-      password: process.env.EMAIL_IMAP_PASSWORD,
-      host: process.env.EMAIL_IMAP_HOST,
-      port: process.env.EMAIL_IMAP_PORT,
-      tls: process.env.EMAIL_IMAP_TLS,
-      tlsOptions: { rejectUnauthorized: false }
-};
-
-
 
 // Require routes
 const assetsRoutes = require('./routes/assets.routes')
@@ -117,28 +100,6 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || '' });
 });
 
-
-////////////////////
-// Email Notifier //
-////////////////////
-notifier(imap)
-  .on('mail', mail => {
-    console.log('NUEVO EMAIL RECIVIDO!!!!!!!!!!!!!!');
-    // console.log('esta es el email que devuelve el módulo:');
-    // console.log(mail)
-  })
-  .on('connected', () => console.log('conectado al servidor de correo'))
-  .start();
-
-////////////////////
-// Cron Scheduler //
-////////////////////
-// console.log('Hey there, this a message just before satrting the Cron Scheduler!!!');
-// cron.schedule('*/10 * * * * *', function(){
-//   console.log('check new email every 10 seconds');
-
-
-// });
 
 
 module.exports = app;
