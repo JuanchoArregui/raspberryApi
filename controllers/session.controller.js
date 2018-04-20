@@ -1,6 +1,9 @@
 const passport = require('passport');
 const ApiError = require('../models/api-error.model');
 
+// Require raspberry for using its methods
+const raspberry = require('../lib_raspberry/raspberry');
+
 module.exports.create = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -21,7 +24,7 @@ module.exports.create = (req, res, next) => {
           } else {
             console.log('session created!')
             res.status(201).json({id: participant._id, email: participant.email});
-            
+            raspberry.whiteLedSingleBeep(); // check ok whith RASPBERRY PI
           }
         });
       }
@@ -32,4 +35,5 @@ module.exports.create = (req, res, next) => {
 module.exports.destroy = (req, res, next) => {
   req.logout();
   res.status(204).json();
+  raspberry.whiteLedSingleBeep(); // check ok whith RASPBERRY PI
 };

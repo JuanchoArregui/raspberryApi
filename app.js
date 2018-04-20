@@ -24,13 +24,14 @@ require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
 
-
 // Require routes
 const assetsRoutes = require('./routes/assets.routes')
 const indexRoutes = require('./routes/index.routes');
 const participantsRoutes = require('./routes/participants.routes');
 const sessionRoutes = require('./routes/session.routes');
 const transactionsRoutes = require('./routes/transactions.routes');
+const raspberryRoutes = require('./routes/raspberry.routes');
+
 
 // view engine setup
 // As this is an API we are not going to set the EJS engine view
@@ -38,7 +39,8 @@ const transactionsRoutes = require('./routes/transactions.routes');
 // uncomment next line if views are needed
 // const expressLayouts = require('express-ejs-layouts');
 
-
+// Require raspberry for using its methods
+const raspberry = require('./lib_raspberry/raspberry');
 
 
 /////////////////////////////////////
@@ -46,6 +48,9 @@ const transactionsRoutes = require('./routes/transactions.routes');
 /////////////////////////////////////
 const app = express();
 
+
+// AT START SOUNDS BEEP AND TURN ON YELLOW LED AT THE RASPBERRY PI
+raspberry.beep();
 
 
 
@@ -85,6 +90,8 @@ app.use('/', indexRoutes);
 app.use('/participants', participantsRoutes);
 app.use('/session', sessionRoutes);
 app.use('/transactions', transactionsRoutes);
+app.use('/raspberry', raspberryRoutes);
+
 
 
 // catch 404 and forward to error handler
